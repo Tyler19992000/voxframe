@@ -1,6 +1,6 @@
 # Tells Railway's Nixpacks builder to install FFmpeg alongside Node.js
 [phases.setup]
-nixPkgs = ["nodejs_20", "ffmpeg"]
+nixPkgs = ["nodejs_22", "ffmpeg"]
 
 [phases.install]
 cmds = ["npm run install:all"]
