@@ -45,6 +45,7 @@ create trigger on_auth_user_created
   for each row execute procedure public.handle_new_user();
 
 -- Increment exports counter (resets monthly)
+-- Used for both Free (2/mo) and Starter (10/mo) limit enforcement in server/routes/render.js
 create or replace function public.increment_exports(uid uuid)
 returns void language plpgsql security definer as $$
 begin

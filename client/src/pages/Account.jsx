@@ -7,6 +7,9 @@ import { CreditCard, User, CheckCircle, AlertCircle, ExternalLink } from 'lucide
 
 const PLAN_LABELS = { free: 'Free', starter: 'Starter', pro: 'Pro' };
 const PLAN_COLORS = { free: 'text-muted', starter: 'text-blue-400', pro: 'text-accent' };
+// Monthly export caps per plan — must match server/routes/render.js EXPORT_LIMITS.
+// 'pro' is intentionally absent = unlimited.
+const EXPORT_LIMITS = { free: 2, starter: 10 };
 
 export default function Account() {
   const { user } = useAuth();
@@ -49,6 +52,7 @@ export default function Account() {
 
   const plan = userData?.plan || 'free';
   const exportsUsed = userData?.exports_this_month || 0;
+  const exportLimit = EXPORT_LIMITS[plan]; // undefined for pro = unlimited
 
   return (
     <div className="max-w-2xl space-y-6">
@@ -105,16 +109,18 @@ export default function Account() {
               )}
             </div>
 
-            {plan === 'free' && (
+            {exportLimit !== undefined && (
               <div className="bg-bg rounded-lg p-3 space-y-1">
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-muted">Exports this month</span>
-                  <span className={exportsUsed >= 2 ? 'text-accent' : 'text-white'}>{exportsUsed} / 2</span>
+                  <span className={exportsUsed >= exportLimit ? 'text-accent' : 'text-white'}>
+                    {exportsUsed} / {exportLimit}
+                  </span>
                 </div>
                 <div className="w-full h-1.5 bg-border rounded-full overflow-hidden">
                   <div
-                    className={`h-full rounded-full ${exportsUsed >= 2 ? 'bg-accent' : 'bg-green-500'}`}
-                    style={{ width: `${Math.min(100, (exportsUsed / 2) * 100)}%` }}
+                    className={`h-full rounded-full ${exportsUsed >= exportLimit ? 'bg-accent' : 'bg-green-500'}`}
+                    style={{ width: `${Math.min(100, (exportsUsed / exportLimit) * 100)}%` }}
                   />
                 </div>
               </div>

@@ -76,8 +76,8 @@ npm run dev
 | Plan     | Price         | Exports | Watermark |
 |----------|---------------|---------|-----------|
 | Free     | Free          | 2/mo    | Yes       |
-| Starter  | $6.99/mo      | ∞       | No        |
-| Pro      | $12.99/mo     | ∞       | No        |
+| Starter  | $6.99/mo      | 10/mo   | No        |
+| Pro      | $9.99/mo      | ∞       | No        |
 
 ## Deployment (Railway/Render)
 

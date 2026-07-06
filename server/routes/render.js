@@ -9,6 +9,9 @@ const storage = require('../services/storage');
 // In-memory render job store (swap for Redis/DB in production)
 const jobs = {};
 
+// Monthly export caps per plan. 'pro' is intentionally absent = unlimited.
+const EXPORT_LIMITS = { free: 2, starter: 10 };
+
 // GET /api/render/check — verify ffmpeg is available
 router.get('/check', async (req, res) => {
   const result = await checkFfmpeg();
@@ -47,10 +50,11 @@ router.post('/start', async (req, res) => {
 
   const plan = userRow?.plan || 'free';
   const exportsThisMonth = userRow?.exports_this_month || 0;
+  const limit = EXPORT_LIMITS[plan]; // undefined for pro = no cap
 
-  if (plan === 'free' && exportsThisMonth >= 2) {
+  if (limit !== undefined && exportsThisMonth >= limit) {
     return res.status(403).json({
-      error: 'Free plan limit reached (2 exports/month). Upgrade to export more.',
+      error: `${plan === 'free' ? 'Free' : 'Starter'} plan limit reached (${limit} exports/month). Upgrade to export more.`,
       upgradeRequired: true,
     });
   }
