@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Read(//usr/local/**)",
+      "Read(//usr/**)",
+      "Bash(command -v nvm)",
+      "Bash(nvm which *)",
+      "Read(//c/Program Files/**)",
+      "Read(//c/Users/sara/AppData/Local/Programs/**)",
+      "Read(//c/Users/sara/AppData/Roaming/**)",
+      "PowerShell($env:PATH += \";C:\\\\Program Files\\\\nodejs;$env:APPDATA\\\\npm\"; node --version; npm --version)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\sara\\\\AppData\\\\Local\" -Directory | Where-Object { $_.Name -match \"node|nvm|volta\" } | Select-Object -ExpandProperty FullName)",
+      "PowerShell(Get-Command winget -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-Command scoop -ErrorAction SilentlyContinue)",
+      "PowerShell(winget install OpenJS.NodeJS.LTS --accept-source-agreements --accept-package-agreements 2>&1)",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;$env:PATH\"; node --version; npm --version)",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;$env:PATH\"; Set-Location \"C:\\\\Users\\\\sara\\\\OneDrive\\\\Documents\\\\SyncCut\"; npm install 2>&1 | Select-Object -Last 5)",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;$env:PATH\"; Set-Location \"C:\\\\Users\\\\sara\\\\OneDrive\\\\Documents\\\\SyncCut\\\\server\"; npm install 2>&1 | Select-Object -Last 5)",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;$env:PATH\"; Set-Location \"C:\\\\Users\\\\sara\\\\OneDrive\\\\Documents\\\\SyncCut\\\\client\"; npm install 2>&1 | Select-Object -Last 5)",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;$env:PATH\"; Set-Location \"C:\\\\Users\\\\sara\\\\OneDrive\\\\Documents\\\\SyncCut\\\\client\"; npm run build 2>&1)",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;$env:PATH\"; Set-Location \"C:\\\\Users\\\\sara\\\\OneDrive\\\\Documents\\\\SyncCut\\\\server\"; $proc = Start-Process -FilePath \"node\" -ArgumentList \"index.js\" -PassThru -RedirectStandardOutput \"$env:TEMP\\\\server_out.txt\" -RedirectStandardError \"$env:TEMP\\\\server_err.txt\"; Start-Sleep -Seconds 3; $out = Get-Content \"$env:TEMP\\\\server_out.txt\" -ErrorAction SilentlyContinue; $err = Get-Content \"$env:TEMP\\\\server_err.txt\" -ErrorAction SilentlyContinue; Write-Output \"STDOUT: $out\"; Write-Output \"STDERR: $err\"; Stop-Process -Id $proc.Id -ErrorAction SilentlyContinue)"
+    ]
+  }
+}
