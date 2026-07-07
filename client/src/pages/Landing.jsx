@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Scissors, Zap, Clock, Download } from 'lucide-react';
+import Footer from '../components/Footer';
 
 const features = [
   { icon: Zap, title: 'Auto-sync images to audio', desc: 'Drop in your images and voiceover — VoxFrame handles the timing automatically.' },
@@ -60,9 +61,7 @@ export default function Landing() {
         </div>
       </section>
 
-      <footer className="border-t border-border px-8 py-6 text-center text-muted text-sm">
-        © {new Date().getFullYear()} VoxFrame. All rights reserved.
-      </footer>
+      <Footer />
     </div>
   );
 }

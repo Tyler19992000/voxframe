@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { Film, LayoutDashboard, User, LogOut, Scissors } from 'lucide-react';
+import Footer from './Footer';
 
 export default function Layout({ children }) {
   const { user, signOut } = useAuth();
@@ -66,10 +67,11 @@ export default function Layout({ children }) {
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 overflow-auto">
-        <div className="max-w-7xl mx-auto p-8">
+      <main className="flex-1 overflow-auto flex flex-col">
+        <div className="max-w-7xl mx-auto p-8 w-full flex-1">
           {children}
         </div>
+        <Footer />
       </main>
     </div>
   );

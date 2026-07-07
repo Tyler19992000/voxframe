@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../contexts/ToastContext';
 import { api } from '../lib/api';
 import { Check, Scissors } from 'lucide-react';
+import Footer from '../components/Footer';
 
 const PRICES = {
   starter: {
@@ -149,6 +150,8 @@ export default function Pricing() {
           ))}
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }
