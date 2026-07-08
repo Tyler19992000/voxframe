@@ -127,18 +127,15 @@ export default function Account() {
             )}
 
             <div className="flex gap-3">
-              {plan === 'free' ? (
+              {plan === 'free' && (
                 <a href="/pricing" className="btn-primary text-sm">
                   Upgrade plan
                 </a>
-              ) : (
-                userData?.stripe_customer_id && (
-                  <button onClick={openPortal} disabled={portalLoading} className="btn-secondary text-sm flex items-center gap-2">
-                    <ExternalLink size={14} />
-                    {portalLoading ? 'Opening…' : 'Manage billing'}
-                  </button>
-                )
               )}
+              <button onClick={openPortal} disabled={portalLoading} className="btn-secondary text-sm flex items-center gap-2">
+                <ExternalLink size={14} />
+                {portalLoading ? 'Opening…' : 'Manage billing'}
+              </button>
             </div>
           </>
         )}
