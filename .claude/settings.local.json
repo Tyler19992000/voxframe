@@ -19,7 +19,11 @@
       "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;$env:PATH\"; Set-Location \"C:\\\\Users\\\\sara\\\\OneDrive\\\\Documents\\\\SyncCut\\\\server\"; npm install 2>&1 | Select-Object -Last 5)",
       "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;$env:PATH\"; Set-Location \"C:\\\\Users\\\\sara\\\\OneDrive\\\\Documents\\\\SyncCut\\\\client\"; npm install 2>&1 | Select-Object -Last 5)",
       "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;$env:PATH\"; Set-Location \"C:\\\\Users\\\\sara\\\\OneDrive\\\\Documents\\\\SyncCut\\\\client\"; npm run build 2>&1)",
-      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;$env:PATH\"; Set-Location \"C:\\\\Users\\\\sara\\\\OneDrive\\\\Documents\\\\SyncCut\\\\server\"; $proc = Start-Process -FilePath \"node\" -ArgumentList \"index.js\" -PassThru -RedirectStandardOutput \"$env:TEMP\\\\server_out.txt\" -RedirectStandardError \"$env:TEMP\\\\server_err.txt\"; Start-Sleep -Seconds 3; $out = Get-Content \"$env:TEMP\\\\server_out.txt\" -ErrorAction SilentlyContinue; $err = Get-Content \"$env:TEMP\\\\server_err.txt\" -ErrorAction SilentlyContinue; Write-Output \"STDOUT: $out\"; Write-Output \"STDERR: $err\"; Stop-Process -Id $proc.Id -ErrorAction SilentlyContinue)"
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;$env:PATH\"; Set-Location \"C:\\\\Users\\\\sara\\\\OneDrive\\\\Documents\\\\SyncCut\\\\server\"; $proc = Start-Process -FilePath \"node\" -ArgumentList \"index.js\" -PassThru -RedirectStandardOutput \"$env:TEMP\\\\server_out.txt\" -RedirectStandardError \"$env:TEMP\\\\server_err.txt\"; Start-Sleep -Seconds 3; $out = Get-Content \"$env:TEMP\\\\server_out.txt\" -ErrorAction SilentlyContinue; $err = Get-Content \"$env:TEMP\\\\server_err.txt\" -ErrorAction SilentlyContinue; Write-Output \"STDOUT: $out\"; Write-Output \"STDERR: $err\"; Stop-Process -Id $proc.Id -ErrorAction SilentlyContinue)",
+      "Bash(npm view *)",
+      "Bash(npm run *)",
+      "Bash(grep -o '<div id=\"root\"><div[^>]\\\\{0,80\\\\}' dist/index.html)",
+      "Bash(pkill -f \"vite preview\")"
     ]
   }
 }

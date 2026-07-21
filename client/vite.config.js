@@ -11,4 +11,9 @@ export default defineConfig({
       '/outputs': { target: 'http://localhost:3001', changeOrigin: true },
     },
   },
+  ssgOptions: {
+    // Only prerender the landing page — every other route (editor, dashboard,
+    // anything behind auth) stays a normal client-rendered SPA route.
+    includedRoutes: (paths) => paths.filter((path) => path === '/'),
+  },
 });
