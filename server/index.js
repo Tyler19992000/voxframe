@@ -5,6 +5,7 @@ const path = require('path');
 const fs = require('fs');
 
 const authMiddleware = require('./middleware/auth');
+const { apiLimiter } = require('./middleware/rateLimit');
 const projectRoutes = require('./routes/projects');
 const uploadRoutes = require('./routes/upload');
 const renderRoutes = require('./routes/render');
@@ -30,10 +31,14 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/outputs', express.static(path.join(__dirname, 'outputs')));
 
 // Routes
+// apiLimiter (100 req/min per user) covers general dashboard/editor traffic —
+// project CRUD, uploads, and render status polling/ffmpeg-check. The stricter
+// exportLimiter (10/hour per user) is applied separately, inside render.js,
+// only to POST /api/render/start.
 app.use('/api/stripe', stripeRoutes);
-app.use('/api/projects', authMiddleware, projectRoutes);
-app.use('/api/upload', authMiddleware, uploadRoutes);
-app.use('/api/render', authMiddleware, renderRoutes);
+app.use('/api/projects', authMiddleware, apiLimiter, projectRoutes);
+app.use('/api/upload', authMiddleware, apiLimiter, uploadRoutes);
+app.use('/api/render', authMiddleware, apiLimiter, renderRoutes);
 
 app.get('/api/health', (req, res) => res.json({ ok: true, ts: Date.now() }));
 

@@ -5,6 +5,7 @@ const { v4: uuidv4 } = require('uuid');
 const supabase = require('../services/supabase');
 const { renderVideo, getAudioDuration, checkFfmpeg } = require('../services/ffmpeg');
 const storage = require('../services/storage');
+const { exportLimiter } = require('../middleware/rateLimit');
 
 // In-memory render job store (swap for Redis/DB in production)
 const jobs = {};
@@ -18,8 +19,8 @@ router.get('/check', async (req, res) => {
   res.json(result);
 });
 
-// POST /api/render/start — kick off a render job
-router.post('/start', async (req, res) => {
+// POST /api/render/start — kick off a render job (10/hour per user — each one is a real FFmpeg job)
+router.post('/start', exportLimiter, async (req, res) => {
   const { projectId } = req.body;
   if (!projectId) return res.status(400).json({ error: 'projectId required' });
 

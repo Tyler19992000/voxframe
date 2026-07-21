@@ -23,7 +23,14 @@
       "Bash(npm view *)",
       "Bash(npm run *)",
       "Bash(grep -o '<div id=\"root\"><div[^>]\\\\{0,80\\\\}' dist/index.html)",
-      "Bash(pkill -f \"vite preview\")"
+      "Bash(pkill -f \"vite preview\")",
+      "Bash(node -e \"require\\('./index.js'\\)\")",
+      "Bash(curl -s http://localhost:3001/api/health)",
+      "Bash(kill %1)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" -X POST http://localhost:3001/api/render/start -H \"Content-Type: application/json\" -d '{\"projectId\":\"test\"}')",
+      "Bash(curl -s -D - -o /dev/null http://localhost:3001/api/projects)",
+      "Bash(node test-ratelimit.js)",
+      "Bash(taskkill //IM node.exe //F)"
     ]
   }
 }
