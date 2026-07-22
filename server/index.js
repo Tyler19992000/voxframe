@@ -6,6 +6,7 @@ const fs = require('fs');
 
 const authMiddleware = require('./middleware/auth');
 const { apiLimiter } = require('./middleware/rateLimit');
+const botProtection = require('./middleware/botProtection');
 const projectRoutes = require('./routes/projects');
 const uploadRoutes = require('./routes/upload');
 const renderRoutes = require('./routes/render');
@@ -19,6 +20,12 @@ const PORT = process.env.PORT || 3001;
   const p = path.join(__dirname, dir);
   if (!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
 });
+
+// Bot/crawler gate — first thing that runs on every request, before CORS,
+// body parsing, static files, or any route. Blocks known bad-actor scrapers
+// and any bot (good or bad) targeting private routes before anything else
+// is processed. See middleware/botProtection.js for the allow/block lists.
+app.use(botProtection);
 
 // Stripe webhook needs raw body — mount before express.json()
 app.use('/api/stripe/webhook', express.raw({ type: 'application/json' }));
